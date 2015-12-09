@@ -1,0 +1,13 @@
+boards:
+  - name: eparis todo
+    id: 536a4a73b73fb0990a493449
+  - name: private networking
+    id: 5595486e79314f7770eb89d3
+  - name: public networking
+    id: 5644a71c9bd0dcac40eead8f
+columns:
+  - new
+  - backlog
+  - next
+  - in progress
+  - pending upstream

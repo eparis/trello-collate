@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    app: trello-collate
+    track: alpha
+    version: "2015-12-12-c5a3e8e"
+  name: trello-collate-2015-12-12-c5a3e8e
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    app: trello-collate
+    track: alpha
+    version: "2015-12-12-c5a3e8e"
+  template:
+    metadata:
+      name: trello-collate
+      namespace: default
+      labels:
+        app: trello-collate
+        track: alpha
+        version: "2015-12-12-c5a3e8e"
+    spec:
+      containers:
+      - command:
+        - /trello-collate
+        - --auth=/etc/secret-volume/auth
+        image: docker.io/eparis/trello-collate:2015-12-12-c5a3e8e
+        imagePullPolicy: IfNotPresent
+        name: trello-collate
+        resources:
+          limits:
+            cpu: 100m
+        volumeMounts:
+        - mountPath: /etc/secret-volume
+          name: secret-volume
+      dnsPolicy: ClusterFirst
+      volumes:
+      - name: secret-volume
+        secret:
+          secretName: trello-auth
